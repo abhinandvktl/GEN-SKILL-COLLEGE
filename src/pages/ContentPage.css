@@ -1,0 +1,60 @@
+.content-page {
+  padding: 2.5rem 6% 3.5rem;
+  background: #fafcfc;
+  min-height: 42vh;
+}
+
+.content-page--narrow {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.content-page__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid rgba(0, 128, 128, 0.12);
+  border-radius: 14px;
+  padding: 2rem 1.75rem 2.25rem;
+  box-shadow: 0 10px 30px rgba(0, 64, 64, 0.06);
+}
+
+.content-page__header {
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.content-page__title {
+  margin: 0;
+  color: var(--teal);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+}
+
+.content-page__intro {
+  margin: 0 0 1rem;
+  color: var(--text-on-light);
+  font-size: 1rem;
+}
+
+.content-page__bullets {
+  margin: 0 0 1.5rem 1.1rem;
+  padding: 0;
+  color: var(--text-on-light);
+}
+
+.content-page__bullets li {
+  margin-bottom: 0.4rem;
+}
+
+.content-page__back {
+  font-weight: 600;
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.content-page__back:hover,
+.content-page__back:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}

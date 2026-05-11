@@ -1,0 +1,52 @@
+:root {
+  --teal: #008080;
+  --teal-dark: #006666;
+  --white: #ffffff;
+  --text-on-light: #1a3a3a;
+  --font: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --header-border: 2px solid var(--teal);
+  --shadow-dropdown: 0 12px 32px rgba(0, 64, 64, 0.18);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text-on-light);
+  background: var(--white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}

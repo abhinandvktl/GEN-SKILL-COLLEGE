@@ -71,6 +71,8 @@ const navItems = [
   },
 ];
 
+const primaryNavLabels = ["Home", "Programmes", "Contact", "About"];
+
 function Logo() {
   return (
     <Link to="/" className="main-header__brand" aria-label="GEN Skill College home">
@@ -86,10 +88,14 @@ function Logo() {
 }
 
 export function MainHeader() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const location = useLocation();
+  const primaryNavItems = primaryNavLabels
+    .map((label) => navItems.find((item) => item.label === label))
+    .filter(Boolean);
+  const drawerNavItems = navItems.filter((item) => !primaryNavLabels.includes(item.label));
 
-  const closeAll = () => setMobileOpen(false);
+  const closeAll = () => setDrawerOpen(false);
 
   const linkClass = (item, navIsActive) => {
     const prefix = item.activePrefix;
@@ -106,24 +112,16 @@ export function MainHeader() {
     <header className="main-header">
       <div className="main-header__bar">
         <div className="main-header__inner">
-          <Logo />
-          <button
-            type="button"
-            className="main-header__menu-btn"
-            aria-expanded={mobileOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setMobileOpen((o) => !o)}
-          >
-            <span className="main-header__menu-icon" aria-hidden="true" />
-            <span className="visually-hidden">Menu</span>
-          </button>
+          <div className="main-header__start">
+            <Logo />
+          </div>
           <nav
             id="primary-navigation"
-            className={`main-header__nav ${mobileOpen ? "main-header__nav--open" : ""}`}
+            className="main-header__nav"
             aria-label="Primary"
           >
             <ul className="main-header__list">
-              {navItems.map((item) => (
+              {primaryNavItems.map((item) => (
                 <li
                   key={item.label}
                   className={item.children ? "main-header__item main-header__item--dropdown" : "main-header__item"}
@@ -160,8 +158,79 @@ export function MainHeader() {
               ))}
             </ul>
           </nav>
+          <div className="main-header__end">
+            <div className="main-header__utility" role="region" aria-label="Utility links">
+              <Link className="main-header__utility-link" to="/pay-now">
+                Pay Now
+              </Link>
+              <span className="main-header__utility-sep" aria-hidden="true">
+                |
+              </span>
+              <Link className="main-header__utility-link main-header__utility-link--emphasis" to="/logins/student">
+                Login
+              </Link>
+            </div>
+            <button
+              type="button"
+              className="main-header__menu-btn"
+              aria-expanded={drawerOpen}
+              aria-controls="secondary-navigation"
+              aria-label={drawerOpen ? "Close more navigation menu" : "Open more navigation menu"}
+              onClick={() => setDrawerOpen((o) => !o)}
+            >
+              <span className="main-header__menu-lines" aria-hidden="true">
+                <span className="main-header__menu-line" />
+                <span className="main-header__menu-line" />
+                <span className="main-header__menu-line" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
+      <div
+        className={`main-header__drawer-backdrop ${drawerOpen ? "main-header__drawer-backdrop--open" : ""}`}
+        onClick={closeAll}
+        aria-hidden="true"
+      />
+      <aside
+        id="secondary-navigation"
+        className={`main-header__drawer ${drawerOpen ? "main-header__drawer--open" : ""}`}
+        aria-label="More navigation"
+      >
+        <div className="main-header__drawer-header">
+          <span className="main-header__drawer-title">More</span>
+          <button type="button" className="main-header__drawer-close" onClick={closeAll} aria-label="Close menu">
+            &times;
+          </button>
+        </div>
+        <nav aria-label="Secondary">
+          <ul className="main-header__drawer-list">
+            {drawerNavItems.map((item) => (
+              <li key={item.label} className="main-header__drawer-item">
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) => linkClass(item, isActive)}
+                  onClick={closeAll}
+                >
+                  {item.label}
+                </NavLink>
+                {item.children ? (
+                  <ul className="main-header__drawer-sublist">
+                    {item.children.map((child) => (
+                      <li key={child.to}>
+                        <Link to={child.to} className="main-header__sublink" onClick={closeAll}>
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
     </header>
   );
 }

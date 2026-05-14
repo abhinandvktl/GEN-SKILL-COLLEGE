@@ -52,6 +52,12 @@
   opacity: 0.95;
 }
 
+.footer__brand .footer__sub:first-of-type {
+  font-family: "Anek Malayalam", sans-serif;
+  font-weight: 600;
+  font-stretch: semi-condensed;
+}
+
 .site-footer__heading {
   margin: 0 0 0.5rem;
   font-size: 1rem;

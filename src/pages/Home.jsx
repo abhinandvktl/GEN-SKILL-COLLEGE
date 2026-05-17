@@ -5,14 +5,17 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Home.css";
 
+
 // Import your images
 // import heroImage from "../assets/direction landing page image.jpg";
 import heroImage2 from "../assets/second-image.png";
 import heroImage3 from "../assets/third-image.png";
 import heroImage4 from "../assets/fourth-image.png";
 
+
 // Import Carousel from bootstrap
 import { Carousel } from 'bootstrap'; 
+
 
 export function Home() {
   useEffect(() => {
@@ -61,8 +64,7 @@ export function Home() {
                     <img
                       src={heroImage4}
                       alt="Filmmaking Production"
-                      className="home-hero__img-animated"
-                    />
+                      className="home-hero__img-animated"/>
                   </div>
                 </div>
               </div>
@@ -114,10 +116,12 @@ export function Home() {
               </div>
             </section>
           </div>
+
           {/* Slide 4 */}
+
           <div className="carousel-item">
             <section className="home-hero" style={{ background: 'var(--teal)' }}>
-              <div className="home-hero__inner">
+              <div className="home-hero__inner"> 
                 <div className="home-hero__copy">
                   <p className="home-hero__badge">
                     <span className="home-hero__badge-text">Stay Ahead of the Curve</span>

@@ -1,0 +1,31 @@
+.video-section .out-text {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.youtube {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.video-thumb {
+  cursor: pointer;
+}
+
+.video-thumb .play-button {
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.video-thumb:focus-visible {
+  outline: 3px solid rgba(8, 136, 136, 0.8);
+  outline-offset: 4px;
+}

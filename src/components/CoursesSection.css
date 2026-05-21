@@ -1,0 +1,41 @@
+/* =======================================================================  Course section */
+.out-text {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-body .btn-more-details {
+  background-color: #088888;
+  color: #fff;
+  max-width: 12rem;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  padding: .5rem .9rem;
+}
+
+.btn-more-details i {
+  display: inline-block;
+  transform: translateX(-6px);
+  opacity: 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.btn-more-details:hover i {
+  transform: translateX(0);
+  opacity: 1;
+}

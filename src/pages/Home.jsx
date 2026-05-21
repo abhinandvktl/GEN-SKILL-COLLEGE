@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Home.css";
-
+import CoursesSection from "../components/CoursesSection";
+import PartnersSection from "../components/PartnersSection";
+import VideoSection from "../components/VideoSection";
 
 // Import your images
 import heroImage from "../assets/direction landing page image.jpg";
@@ -143,33 +145,16 @@ export function Home() {
 
         </div>
       </div>
+      
+      {/* Courses Section */}
+      <CoursesSection />
 
-      {/* Highlights Section */}
-      <section className="home-stripes" aria-label="Highlights">
-        <div className="home-stripes__inner">
-          <article className="home-card">
-            <h2 className="home-card__title">Programmes</h2>
-            <p className="home-card__text">
-              B.Voc degrees, advanced diplomas, diplomas, and certificates designed for portfolios.
-            </p>
-            <Link className="home-card__link" to="/programmes/bvoc">Explore programmes</Link>
-          </article>
-          <article className="home-card">
-            <h2 className="home-card__title">Training & Certifications</h2>
-            <p className="home-card__text">
-              Focused skill blocks for teams and professionals—structured assessments.
-            </p>
-            <Link className="home-card__link" to="/training-certifications">View training paths</Link>
-          </article>
-          <article className="home-card">
-            <h2 className="home-card__title">Placements</h2>
-            <p className="home-card__text">
-              Placement desk support, vacancies, and employer partnerships.
-            </p>
-            <Link className="home-card__link" to="/placement/our-placements">Placement hub</Link>
-          </article>
-        </div>
-      </section>
+      {/* Partners Section */}
+      <PartnersSection />
+
+      {/* Video Section */}
+      <VideoSection />
+
     </div>
   );
 }

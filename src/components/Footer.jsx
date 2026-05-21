@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import footerLogo from "../assets/Footer-logo-white.webp";
 
 const col1 = [
   { label: "B.Voc Degree Programmes", to: "/programmes/bvoc" },
@@ -40,11 +41,9 @@ const col3 = [
 function LogoBlock() {
   return (
     <div className="footer__brand">
-      <div className="footer__logo-circle" aria-hidden="true">
-        GEN
-      </div>
+      <img src={footerLogo} alt="GEN Skill College" className="footer__brand-img" />
       <div>
-        <p className="footer__title">GEN Skill College</p>
+        <span className="visually-hidden">GEN Skill College</span>
         <p className="footer__sub">(A Unit of Garvit Education Network LLP)</p>
         <p className="footer__sub">Official Skill &amp; Vocational Training Provider of Mind Power University</p>
       </div>

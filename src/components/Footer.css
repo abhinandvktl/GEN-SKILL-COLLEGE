@@ -39,6 +39,14 @@
   flex-shrink: 0;
 }
 
+/* Footer brand image */
+.footer__brand-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
 .footer__title {
   margin: 0 0 0.35rem;
   font-size: 1.25rem;

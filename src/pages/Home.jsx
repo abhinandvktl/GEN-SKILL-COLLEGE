@@ -7,10 +7,10 @@ import "./Home.css";
 
 
 // Import your images
-// import heroImage from "../assets/direction landing page image.jpg";
-import heroImage2 from "../assets/second-image.png";
-import heroImage3 from "../assets/third-image.png";
-import heroImage4 from "../assets/fourth-image.png";
+import heroImage from "../assets/direction landing page image.jpg";
+import heroImage2 from "../assets/hero-banner-course-images1.webp";
+import heroImage3 from "../assets/Innovative-Remedial-Teaching-course-images1.webp";
+import heroImage4 from "../assets/AI-Filmmaking-image.webp";
 
 
 // Import Carousel from bootstrap

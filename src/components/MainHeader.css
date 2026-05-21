@@ -96,6 +96,13 @@
   line-height: 1.15;
 }
 
+/* Logo image for navbar */
+.main-header__brand-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
 .main-header__brand-title {
   font-weight: 700;
   font-size: 1.125rem;

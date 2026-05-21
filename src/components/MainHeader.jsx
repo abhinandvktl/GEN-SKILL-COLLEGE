@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./MainHeader.css";
+import logoNavbar from "../assets/Logo-Navbar.webp";
 
 /** Matches CSS in MainHeader.css — mobile layout hides the bar nav and uses the full drawer. */
 const MOBILE_NAV_MEDIA = "(max-width: 767px)";
@@ -263,13 +264,8 @@ function MobileDrawerNav({ items, pathname, closeAll, drawerOpen }) {
 function Logo() {
   return (
     <Link to="/" className="main-header__brand" aria-label="GEN Skill College home">
-      <span className="main-header__logo-circle" aria-hidden="true">
-        GEN
-      </span>
-      <span className="main-header__brand-text">
-        <span className="main-header__brand-title">GEN Skill College</span>
-        <span className="main-header__brand-sub">Skill College</span>
-      </span>
+      <img src={logoNavbar} alt="GEN Skill College" className="main-header__brand-img" />
+      <span className="visually-hidden">GEN Skill College</span>
     </Link>
   );
 }

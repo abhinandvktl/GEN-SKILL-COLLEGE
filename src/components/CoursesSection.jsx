@@ -4,9 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import '../components/CoursesSection.css';
 
-import cardImg from "../assets/AI-Filmmaking-image.webp";
+import cardImg from "../assets/course_card_imgtemp.jpg";
 
-const courses = Array.from({ length: 6 }).map((_, i) => ({
+const courses = Array.from({ length: 4 }).map((_, i) => ({
   id: i + 1,
   title: "Lorem Ipsum",
   text:

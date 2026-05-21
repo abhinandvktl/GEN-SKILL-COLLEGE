@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./VideoSection.css";
-import thumbnail from "../assets/AI-Filmmaking-image.webp";
+import thumbnail from "../assets/video-preview.png";
 
 export default function VideoSection() {
   const [showVideo, setShowVideo] = useState(false);

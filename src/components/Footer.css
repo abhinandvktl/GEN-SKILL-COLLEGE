@@ -21,8 +21,10 @@
 
 .footer__brand {
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
 }
 
 .footer__logo-circle {

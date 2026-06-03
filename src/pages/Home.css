@@ -6,7 +6,30 @@
   background: var(--teal);
   color: var(--white);
   padding: 3rem 6% 3.5rem;
+  min-height: 550px; /* Ensures consistent height during slides */
+  display: flex;
+  align-items: center;
 }
+
+@keyframes floatZoom {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    transform: translateY(-15px) scale(1.05); /* Moves up and zooms slightly */
+  }
+}
+
+.home-hero__img-animated {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  /* Apply the animation here */
+  animation: floatZoom 5s ease-in-out infinite alternate;
+}
+
+
 
 .home-hero__inner {
   max-width: 1200px;
@@ -14,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 3.5rem;
   flex-wrap: wrap;
 }
 
@@ -99,12 +122,18 @@
 }
 
 .home-hero__frame {
-  border: 3px solid rgba(0, 0, 0, 0.35);
+  /* border: 3px solid rgba(0, 0, 0, 0.35); */
   padding: 0;
-  background: rgba(0, 0, 0, 0.2);
+  /* background: rgba(0, 0, 0, 0.2); */
   max-width: 520px;
   width: 100%;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); */
+  /* overflow: hidden; Keeps the zoom inside the border */
+}
+
+/* Bootstrap Carousel Fixes */
+.carousel-item {
+  transition: transform 0.6s ease-in-out; /* Smoother slide transition */
 }
 
 .home-hero__frame img {

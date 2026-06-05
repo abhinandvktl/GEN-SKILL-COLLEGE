@@ -24,17 +24,17 @@ import remedialTextAnim from "../assets/Remedial Teaching Text.json";
 // Controlled Lottie Wrapper Component
 const ManagedLottieText = ({ animationData, lottieRef }) => {
   const options = {
-    animationData: animationData,
+    animationData,
     loop: true,
-    autoplay: true,
+    autoplay: false,
   };
-  const { View, play } = useLottie(options);
+  const { View, play, stop } = useLottie(options);
 
   useEffect(() => {
     if (lottieRef) {
-      lottieRef.current = { play };
+      lottieRef.current = { play, stop };
     }
-  }, [play, lottieRef]);
+  }, [play, stop, lottieRef]);
 
   return <div className="home-hero__text-animated">{View}</div>;
 };
@@ -58,18 +58,29 @@ export function Home() {
         pause: false
       });
 
-      // Synchronize slider transitions to re-trigger JSON internal keyframes
+      const slideRefs = [aiRef, wealthRef, businessRef, remedialRef];
+      const stopAllSlides = () => {
+        slideRefs.forEach((ref) => ref.current?.stop());
+      };
+
       const handleSlide = (event) => {
+        stopAllSlides();
+
         setTimeout(() => {
-          if (event.to === 0 && aiRef.current) aiRef.current.play();
-          if (event.to === 1 && wealthRef.current) wealthRef.current.play();
-          if (event.to === 2 && businessRef.current) businessRef.current.play();
-          if (event.to === 3 && remedialRef.current) remedialRef.current.play();
+          if (event.to === 0) aiRef.current?.play();
+          if (event.to === 1) wealthRef.current?.play();
+          if (event.to === 2) businessRef.current?.play();
+          if (event.to === 3) remedialRef.current?.play();
         }, 50);
       };
 
       myCarouselElement.addEventListener('slid.bs.carousel', handleSlide);
       carousel.cycle();
+
+      if (aiRef.current) {
+        stopAllSlides();
+        aiRef.current.play();
+      }
 
       return () => {
         myCarouselElement.removeEventListener('slid.bs.carousel', handleSlide);

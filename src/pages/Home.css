@@ -45,7 +45,9 @@
   flex: 1 1 320px;
   max-width: 560px;
 }
-
+.home-hero__copy .home-hero__img-animated {
+  margin-bottom: 1.5rem; /* Forces a consistent gap between the JSON text lines and your HTML buttons */
+}
 .home-hero__badge {
   margin: 0 0 1.25rem;
 }

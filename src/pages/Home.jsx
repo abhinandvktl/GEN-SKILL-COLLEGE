@@ -1,5 +1,4 @@
-
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -8,25 +7,49 @@ import CoursesSection from "../components/CoursesSection";
 import PartnersSection from "../components/PartnersSection";
 import VideoSection from "../components/VideoSection";
 
-// Import your images
-import heroImage from "../assets/direction landing page image.jpg";
+// 1. Keep your original image imports exactly on the right side
 import heroImage2 from "../assets/hero-banner-course-images1.webp";
 import heroImage3 from "../assets/Innovative-Remedial-Teaching-course-images1.webp";
 import heroImage4 from "../assets/AI-Filmmaking-image.webp";
 
-
-// Import Carousel from bootstrap
+// 2. Import your Lottie player tool and JSON text animations for the left side
+import { useLottie } from "lottie-react";
 import { Carousel } from 'bootstrap'; 
 
+import aiTextAnim from "../assets/AI Filmmaking Text.json";
+import wealthTextAnim from "../assets/Wealth Management Text.json";
+import businessTextAnim from "../assets/Business Automation Text.json";
+import remedialTextAnim from "../assets/Remedial Teaching Text.json";
+
+// Controlled Lottie Wrapper Component
+const ManagedLottieText = ({ animationData, lottieRef }) => {
+  const options = {
+    animationData: animationData,
+    loop: true,
+    autoplay: true,
+  };
+  const { View, play } = useLottie(options);
+
+  useEffect(() => {
+    if (lottieRef) {
+      lottieRef.current = { play };
+    }
+  }, [play, lottieRef]);
+
+  return <div className="home-hero__text-animated">{View}</div>;
+};
 
 export function Home() {
+  // Animation tracking references for slide rotations
+  const aiRef = useRef(null);
+  const wealthRef = useRef(null);
+  const businessRef = useRef(null);
+  const remedialRef = useRef(null);
+
   useEffect(() => {
     document.title = "GEN Skill College | Home";
-    
-    // Initialize Animations
     AOS.init({ duration: 1000 });
 
-    // Initialize Carousel
     const myCarouselElement = document.querySelector('#heroCarousel');
     if (myCarouselElement) {
       const carousel = new Carousel(myCarouselElement, {
@@ -34,59 +57,73 @@ export function Home() {
         ride: 'carousel',
         pause: false
       });
+
+      // Synchronize slider transitions to re-trigger JSON internal keyframes
+      const handleSlide = (event) => {
+        setTimeout(() => {
+          if (event.to === 0 && aiRef.current) aiRef.current.play();
+          if (event.to === 1 && wealthRef.current) wealthRef.current.play();
+          if (event.to === 2 && businessRef.current) businessRef.current.play();
+          if (event.to === 3 && remedialRef.current) remedialRef.current.play();
+        }, 50);
+      };
+
+      myCarouselElement.addEventListener('slid.bs.carousel', handleSlide);
       carousel.cycle();
+
+      return () => {
+        myCarouselElement.removeEventListener('slid.bs.carousel', handleSlide);
+      };
     }
   }, []);
 
   return (
     <div className="home">
-      {/* Bootstrap Carousel Wrapper */}
       <div id="heroCarousel" className="carousel slide">
         <div className="carousel-inner">
           
-          {/* Slide 1 */}
+          {/* Slide 1 - AI Filmmaking */}
           <div className="carousel-item active">
             <section className="home-hero" aria-labelledby="home-hero-heading">
               <div className="home-hero__inner">
+                {/* LEFT SIDE: Text Animation sits exactly where text was */}
                 <div className="home-hero__copy" data-aos="fade-right">
-                  <p className="home-hero__badge">
-                    <span className="home-hero__badge-text">Build a Future-Ready Career in</span>
-                  </p>
-                  <h1 id="home-hero-heading" className="home-hero__title">
-                    AI FILMMAKING & DIGITAL MEDIA PRODUCTION
-                  </h1>
-                  <p className="home-hero__subtitle">B.Voc 3-Year Degree Program</p>
+                  
+                  <ManagedLottieText animationData={aiTextAnim} lottieRef={aiRef} />
+                  
                   <div className="home-hero__actions">
                     <Link className="home-hero__btn" to="/contact/our-office">Join the Class</Link>
                     <Link className="home-hero__btn" to="/programmes/bvoc">Learn more</Link>
                   </div>
                 </div>
+                {/* RIGHT SIDE: Your original image code restored */}
                 <div className="home-hero__visual" data-aos="fade-left">
                   <div className="home-hero__frame">
                     <img
                       src={heroImage4}
                       alt="Filmmaking Production"
-                      className="home-hero__img-animated"/>
+                      className="home-hero__img-animated"
+                    />
                   </div>
                 </div>
               </div>
             </section>
           </div>
 
-          {/* Slide 2 */}
+          {/* Slide 2 - Digital Wealth Management */}
           <div className="carousel-item">
             <section className="home-hero" style={{ background: 'var(--teal)' }}>
                <div className="home-hero__inner">
+                  {/* LEFT SIDE */}
                   <div className="home-hero__copy">
-                    <p className="home-hero__badge">
-                      <span className="home-hero__badge-text">Master New Skills</span>
-                    </p>
-                    <h1 className="home-hero__title">DIGITAL WEALTH MANAGEMENT</h1>
-                    <p className="home-hero__subtitle">Professional Certification Programs</p>
+                    
+                    <ManagedLottieText animationData={wealthTextAnim} lottieRef={wealthRef} />
+                    
                     <div className="home-hero__actions">
                       <Link className="home-hero__btn" to="/programmes">Explore All</Link>
                     </div>
                   </div>
+                  {/* RIGHT SIDE */}
                   <div className="home-hero__visual">
                     <div className="home-hero__frame">
                       <img src={heroImage2} className="home-hero__img-animated" alt="Second Slide" />
@@ -96,20 +133,20 @@ export function Home() {
             </section>
           </div>
 
-          {/* Slide 3 */}
+          {/* Slide 3 - Digital Business Automation */}
           <div className="carousel-item">
             <section className="home-hero" style={{ background: 'var(--teal)' }}>
               <div className="home-hero__inner">
+                {/* LEFT SIDE */}
                 <div className="home-hero__copy">
-                  <p className="home-hero__badge">
-                    <span className="home-hero__badge-text">Stay Ahead of the Curve</span>
-                  </p>
-                  <h1 className="home-hero__title">DIGITAL BUSINESS AUTOMATION</h1>
-                  <p className="home-hero__subtitle">Fostering Creative Solutions</p>
+                  
+                  <ManagedLottieText animationData={businessTextAnim} lottieRef={businessRef} />
+                  
                   <div className="home-hero__actions">
                     <Link className="home-hero__btn" to="/programmes">Explore All</Link>
                   </div>
                 </div>
+                {/* RIGHT SIDE */}
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">
                     <img src={heroImage2} className="home-hero__img-animated" alt="Third Slide" />
@@ -119,21 +156,20 @@ export function Home() {
             </section>
           </div>
 
-          {/* Slide 4 */}
-
+          {/* Slide 4 - Innovative Remedial Teaching */}
           <div className="carousel-item">
             <section className="home-hero" style={{ background: 'var(--teal)' }}>
               <div className="home-hero__inner"> 
+                {/* LEFT SIDE */}
                 <div className="home-hero__copy">
-                  <p className="home-hero__badge">
-                    <span className="home-hero__badge-text">Stay Ahead of the Curve</span>
-                  </p>
-                  <h1 className="home-hero__title">INNOVATIVE REMEDICAL TEACHING</h1>
-                  <p className="home-hero__subtitle">Driving Insights with Data</p>
+                  
+                  <ManagedLottieText animationData={remedialTextAnim} lottieRef={remedialRef} />
+                  
                   <div className="home-hero__actions">
                     <Link className="home-hero__btn" to="/programmes">Explore All</Link>
                   </div>
                 </div>
+                {/* RIGHT SIDE */}
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">
                     <img src={heroImage3} className="home-hero__img-animated" alt="Fourth Slide" />
@@ -146,15 +182,9 @@ export function Home() {
         </div>
       </div>
       
-      {/* Courses Section */}
       <CoursesSection />
-
-      {/* Partners Section */}
       <PartnersSection />
-
-      {/* Video Section */}
       <VideoSection />
-
     </div>
   );
 }

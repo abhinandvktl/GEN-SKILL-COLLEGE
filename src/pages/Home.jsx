@@ -53,7 +53,7 @@ export function Home() {
     const myCarouselElement = document.querySelector('#heroCarousel');
     if (myCarouselElement) {
       const carousel = new Carousel(myCarouselElement, {
-        interval: 3000,
+        interval: 6000,
         ride: 'carousel',
         pause: false
       });

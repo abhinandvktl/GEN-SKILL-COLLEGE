@@ -5,18 +5,18 @@
 .home-hero {
   background: var(--teal);
   color: var(--white);
-  padding: 3rem 6% 3.5rem;
-  min-height: 550px; /* Ensures consistent height during slides */
+  padding: 3rem 6% 4.5rem;
+  min-height: 550px; 
   display: flex;
   align-items: center;
 }
 
 @keyframes floatZoom {
   0% {
-    transform: translateY(0px) scale(1);
+    transform: scale(1);
   }
   100% {
-    transform: translateY(-15px) scale(1.05); /* Moves up and zooms slightly */
+    transform: scale(1.05);
   }
 }
 
@@ -25,11 +25,25 @@
   height: auto;
   object-fit: cover;
   display: block;
-  /* Apply the animation here */
+  transform-origin: center;
   animation: floatZoom 5s ease-in-out infinite alternate;
 }
 
+.home-hero__frame {
+  max-width: 520px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.home-hero__frame img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
 
 .home-hero__inner {
   max-width: 1200px;
@@ -45,9 +59,11 @@
   flex: 1 1 320px;
   max-width: 560px;
 }
+
 .home-hero__copy .home-hero__img-animated {
-  margin-bottom: 1.5rem; /* Forces a consistent gap between the JSON text lines and your HTML buttons */
+  margin-bottom: 1.5rem;
 }
+
 .home-hero__badge {
   margin: 0 0 1.25rem;
 }
@@ -121,30 +137,126 @@
   flex: 1 1 300px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.home-hero__frame {
-  /* border: 3px solid rgba(0, 0, 0, 0.35); */
-  padding: 0;
-  /* background: rgba(0, 0, 0, 0.2); */
-  max-width: 520px;
+/* ==========================================================================
+    Bootstrap Carousel Fixes & Clean Custom Dot System
+    ========================================================================== */
+
+/* Ensure proper height for carousel components */
+#heroCarousel,
+#heroCarousel .carousel-inner,
+#heroCarousel .carousel-item {
+  height: 100%;
+}
+
+/* Carousel - root container */
+#heroCarousel {
+  position: relative;
   width: 100%;
-  /* box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); */
-  /* overflow: hidden; Keeps the zoom inside the border */
 }
 
-/* Bootstrap Carousel Fixes */
-.carousel-item {
-  transition: transform 0.6s ease-in-out; /* Smoother slide transition */
+/* Carousel inner - no stacking context */
+#heroCarousel .carousel-inner {
+  z-index: auto !important;
 }
 
-.home-hero__frame img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
+/* Carousel items - below indicators/buttons */
+#heroCarousel .carousel-item {
+  z-index: 1 !important;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Carousel Indicators - positioned above slides */
+#heroCarousel .carousel-indicators {
+  z-index: 1000 !important;
+}
+
+/* Carousel Indicators and Buttons - positioned absolutely within carousel */
+#heroCarousel .carousel-indicators,
+#heroCarousel .carousel-btn {
+  position: absolute;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute !important;
+  bottom: 1.5rem !important; 
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+}
+
+.carousel-indicators button {
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  opacity: 1 !important;
+  margin: 0 6px !important;
+  padding: 0 !important;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease !important;
+  text-indent: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  cursor: pointer;
+  box-sizing: content-box;
+}
+
+.carousel-indicators button:hover,
+.carousel-indicators button:focus-visible {
+  background: rgba(255, 255, 255, 0.8) !important;
+  transform: scale(1.15);
+  outline: none;
+}
+
+.carousel-indicators button.active {
+  background: var(--white) !important;
+  transform: scale(1.35) !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 100;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #2d3436;
+}
+
+.btn-left { left: 20px; }
+.btn-right { right: 20px; }
+
+.carousel-control-prev,
+.carousel-control-next {
+  display: none !important;
+}
+
+/* Rest of your structural layout components */
 .home-stripes {
   padding: 2.5rem 6% 3.5rem;
   background: linear-gradient(180deg, #f4faf9 0%, #ffffff 100%);
@@ -218,6 +330,6 @@
 
 @media (max-width: 480px) {
   .home-hero {
-    padding: 2rem 5% 2.5rem;
+    padding: 2rem 5% 3.5rem; /* Ensure dots don't overflow layout limits on tiny screens */
   }
 }

@@ -1,3 +1,7 @@
+/* ==========================================================================
+    Base Layout & Hero Core Layout
+   ========================================================================== */
+
 .home {
   background: var(--white);
 }
@@ -36,6 +40,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.home-hero__frame--shrink {
+  max-width: 420px;
+  padding-top: 1.5rem;
+}
+
+.home-hero__lottie-overlay {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 
 .home-hero__frame img {
@@ -55,14 +78,31 @@
   flex-wrap: wrap;
 }
 
+/* ==========================================================================
+    Hero Left Copy Section & New Asset Positioning (Slide 5)
+   ========================================================================== */
+
 .home-hero__copy {
   flex: 1 1 320px;
-  max-width: 560px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Styles specifically added for the Slide 5 UGC top animation wrapper */
+.home-hero__ugc-logo {
+  max-width: 165px;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  display: block;
+  align-self: flex-start;
 }
 
 .home-hero__copy .home-hero__img-animated {
   margin-bottom: 1.5rem;
 }
+
 
 .home-hero__badge {
   margin: 0 0 1.25rem;
@@ -102,10 +142,16 @@
   opacity: 0.95;
 }
 
+/* ==========================================================================
+    Action Triggers & Buttons
+   ========================================================================== */
+
 .home-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  padding-left: 15px;
+  margin-top: 1rem;
 }
 
 .home-hero__btn {
@@ -141,45 +187,39 @@
 }
 
 /* ==========================================================================
-    Bootstrap Carousel Fixes & Clean Custom Dot System
-    ========================================================================== */
+    Bootstrap Carousel Overrides & Custom Dot System
+   ========================================================================== */
 
-/* Ensure proper height for carousel components */
+/* Ensure proper height configurations across carousel structures */
 #heroCarousel,
 #heroCarousel .carousel-inner,
 #heroCarousel .carousel-item {
   height: 100%;
 }
 
-/* Carousel - root container */
 #heroCarousel {
   position: relative;
   width: 100%;
 }
 
-/* Carousel inner - no stacking context */
 #heroCarousel .carousel-inner {
   z-index: auto !important;
 }
 
-/* Carousel items - below indicators/buttons */
 #heroCarousel .carousel-item {
   z-index: 1 !important;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Carousel Indicators - positioned above slides */
 #heroCarousel .carousel-indicators {
   z-index: 1000 !important;
 }
 
-/* Carousel Indicators and Buttons - positioned absolutely within carousel */
 #heroCarousel .carousel-indicators,
 #heroCarousel .carousel-btn {
   position: absolute;
 }
 
-/* Carousel Indicators */
 .carousel-indicators {
   position: absolute !important;
   bottom: 1.5rem !important; 
@@ -225,7 +265,7 @@
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-/* Custom Navigation Buttons */
+/* Custom Navigation Arrow Buttons */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -256,7 +296,10 @@
   display: none !important;
 }
 
-/* Rest of your structural layout components */
+/* ==========================================================================
+    Subsections Layout Structure (Cards & Stripes)
+   ========================================================================== */
+
 .home-stripes {
   padding: 2.5rem 6% 3.5rem;
   background: linear-gradient(180deg, #f4faf9 0%, #ffffff 100%);
@@ -305,6 +348,10 @@
   outline: none;
 }
 
+/* ==========================================================================
+    Media Queries & Responsive Logic
+   ========================================================================== */
+
 @media (max-width: 900px) {
   .home-hero__inner {
     flex-direction: column-reverse;
@@ -313,6 +360,12 @@
 
   .home-hero__copy {
     max-width: none;
+  }
+
+  .home-hero__ugc-logo {
+    max-width: 120px;
+    align-self: center; /* Center-align the UGC logo icon on small screens if desired */
+    margin: 0 auto 1rem;
   }
 
   .home-hero__visual {
@@ -326,10 +379,15 @@
   .home-stripes__inner {
     grid-template-columns: 1fr;
   }
+
+  .home-hero__actions {
+    padding-left: 10px;
+    justify-content: center; /* Better button positioning context on tablet/mobile views */
+  }
 }
 
 @media (max-width: 480px) {
   .home-hero {
-    padding: 2rem 5% 3.5rem; /* Ensure dots don't overflow layout limits on tiny screens */
+    padding: 2rem 5% 3.5rem; /* Secures structural spacing and safety buffers from indicators layout */
   }
 }

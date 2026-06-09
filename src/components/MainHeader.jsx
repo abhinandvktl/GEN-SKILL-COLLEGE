@@ -172,10 +172,13 @@ function MobileDrawerNav({ items, pathname, closeAll, drawerOpen }) {
       ? " main-header__drawer-mobile-sublink--active"
       : "";
 
+  const contactItem = items.find((it) => it.label === "Contact");
+  const otherItems = items.filter((it) => it.label !== "Contact");
+
   return (
     <div className="main-header__drawer-mobile-body">
       <ul className="main-header__drawer-mobile-list">
-        {items.map((item) => {
+        {otherItems.map((item) => {
           const expanded = openLabel === item.label;
           const sectionActive = sectionIsActive(pathname, item);
 
@@ -257,6 +260,17 @@ function MobileDrawerNav({ items, pathname, closeAll, drawerOpen }) {
           </a>
         ))}
       </div>
+      {contactItem && (
+        <div className="main-header__drawer-contact">
+          <Link
+            to={contactItem.to}
+            className="main-header__drawer-contact-btn"
+            onClick={closeAll}
+          >
+            {contactItem.label}
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

@@ -8,9 +8,12 @@ import PartnersSection from "../components/PartnersSection";
 import VideoSection from "../components/VideoSection";
 
 // Image Imports
-import heroImage2 from "../assets/hero-banner-course-images1.webp";
-import heroImage3 from "../assets/Innovative-Remedial-Teaching-course-images1.webp";
-import heroImage4 from "../assets/AI-Filmmaking-image.webp";
+import heroImage1 from "../assets/AI Filmmaking-image.webp";
+import heroImage2 from "../assets/Wealth Management.webp";
+import heroImage3 from "../assets/Business Automation.webp";
+import heroImage4 from "../assets/Remedial-Teaching.webp";
+// Make sure this file exists in src/assets/
+import heroImage5 from "../assets/hero-banner-title-images.webp"; 
 
 // Lottie and Bootstrap imports
 import { useLottie } from "lottie-react";
@@ -20,9 +23,10 @@ import aiTextAnim from "../assets/AI Filmmaking Text.json";
 import wealthTextAnim from "../assets/Wealth Management Text.json";
 import businessTextAnim from "../assets/Business Automation Text.json";
 import remedialTextAnim  from "../assets/Remedial Teaching Text.json";
+import brandTitleHB from "../assets/brand-title-hb.json";
 
 // Controlled Lottie Wrapper Component
-const ManagedLottieText = ({ animationData, lottieRef }) => {
+const ManagedLottieText = ({ animationData, lottieRef, className }) => {
   const options = {
     animationData,
     loop: true,
@@ -36,15 +40,17 @@ const ManagedLottieText = ({ animationData, lottieRef }) => {
     }
   }, [play, stop, lottieRef]);
 
-  return <div className="home-hero__text-animated">{View}</div>;
+  return <div className={`home-hero__text-animated ${className || ""}`}>{View}</div>;
 };
 
 export function Home() {
-  // Animation tracking references for slide rotations
+  // Animation tracking references
   const aiRef = useRef(null);
   const wealthRef = useRef(null);
   const businessRef = useRef(null);
   const remedialRef = useRef(null);
+  const brandRef = useRef(null);
+  const ugcRef = useRef(null);
 
   useEffect(() => {
     document.title = "GEN Skill College | Home";
@@ -58,12 +64,12 @@ export function Home() {
         pause: false
       });
 
-      const slideRefs = [aiRef, wealthRef, businessRef, remedialRef];
+      // Added brandRef and ugcRef to the stop list
+      const slideRefs = [aiRef, wealthRef, businessRef, remedialRef, brandRef, ugcRef];
       const stopAllSlides = () => {
         slideRefs.forEach((ref) => ref.current?.stop());
       };
 
-      // Handle structural reset when active changes complete
       const handleSlid = (event) => {
         stopAllSlides();
         setTimeout(() => {
@@ -71,6 +77,10 @@ export function Home() {
           if (event.to === 1) wealthRef.current?.play();
           if (event.to === 2) businessRef.current?.play();
           if (event.to === 3) remedialRef.current?.play();
+          if (event.to === 4) {
+            brandRef.current?.play();
+            ugcRef.current?.play();
+          }
         }, 50);
       };
 
@@ -83,7 +93,6 @@ export function Home() {
       
       carousel.cycle();
 
-      // Initial component mount call for page loading state
       if (aiRef.current) {
         stopAllSlides();
         aiRef.current.play();
@@ -100,18 +109,19 @@ export function Home() {
     <div className="home">
       <div id="heroCarousel" className="carousel slide">
         
-        {/* Dot Indicators System */}
+        {/* Updated Dot Indicators (5 dots now) */}
         <div className="carousel-indicators">
           <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
           <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
         </div>
 
         <div className="carousel-inner">
           {/* Slide 1 - AI Filmmaking */}
           <div className="carousel-item active">
-            <section className="home-hero" aria-labelledby="home-hero-heading">
+            <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy" data-aos="fade-right">
                   <ManagedLottieText animationData={aiTextAnim} lottieRef={aiRef} />
@@ -122,7 +132,7 @@ export function Home() {
                 </div>
                 <div className="home-hero__visual" data-aos="fade-left">
                   <div className="home-hero__frame">
-                    <img src={heroImage4} alt="Filmmaking Production" className="home-hero__img-animated" />
+                    <img src={heroImage1} alt="Filmmaking" className="home-hero__img-animated" />
                   </div>
                 </div>
               </div>
@@ -131,7 +141,7 @@ export function Home() {
 
           {/* Slide 2 - Digital Wealth Management */}
           <div className="carousel-item">
-            <section className="home-hero" style={{ background: 'var(--teal)' }}>
+            <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
                   <ManagedLottieText animationData={wealthTextAnim} lottieRef={wealthRef} />
@@ -141,16 +151,16 @@ export function Home() {
                 </div>
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">
-                    <img src={heroImage2} className="home-hero__img-animated" alt="Second Slide" />
+                    <img src={heroImage2} className="home-hero__img-animated" alt="Digital Wealth Management" />
                   </div>
                 </div>
               </div>
             </section>
           </div>
 
-          {/* Slide 3 - Digital Business Automation */}
+          {/* Slide 3 - Business Automation */}
           <div className="carousel-item">
-            <section className="home-hero" style={{ background: 'var(--teal)' }}>
+            <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
                   <ManagedLottieText animationData={businessTextAnim} lottieRef={businessRef} />
@@ -160,17 +170,17 @@ export function Home() {
                 </div>
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">
-                    <img src={heroImage2} className="home-hero__img-animated" alt="Third Slide" />
+                    <img src={heroImage3} className="home-hero__img-animated" alt="Business Automation" />
                   </div>
                 </div>
               </div>
             </section>
           </div>
 
-          {/* Slide 4 - Innovative Remedial Teaching */}
+          {/* Slide 4 - Remedial Teaching */}
           <div className="carousel-item">
-            <section className="home-hero" style={{ background: 'var(--teal)' }}>
-              <div className="home-hero__inner"> 
+            <section className="home-hero">
+              <div className="home-hero__inner">
                 <div className="home-hero__copy">
                   <ManagedLottieText animationData={remedialTextAnim} lottieRef={remedialRef} />
                   <div className="home-hero__actions">
@@ -179,7 +189,23 @@ export function Home() {
                 </div>
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">
-                    <img src={heroImage3} className="home-hero__img-animated" alt="Fourth Slide" />
+                    <img src={heroImage4} className="home-hero__img-animated" alt="Remedial Teaching" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* Slide 5 */}
+          <div className="carousel-item">
+            <section className="home-hero">
+              <div className="home-hero__inner">
+                <div className="home-hero__copy">
+                  <ManagedLottieText animationData={brandTitleHB} lottieRef={brandRef} className="home-hero__text-animated--small" />
+                </div>
+                <div className="home-hero__visual">
+                  <div className="home-hero__frame">
+                    <img src={heroImage5} className="home-hero__img-animated" alt="Hero Banner Title" />
                   </div>
                 </div>
               </div>
@@ -187,7 +213,6 @@ export function Home() {
           </div>
         </div>
 
-        {/* Custom Navigation Buttons */}
         <button className="carousel-btn btn-left" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous Slide">&#10094;</button>
         <button className="carousel-btn btn-right" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next Slide">&#10095;</button>
       </div>

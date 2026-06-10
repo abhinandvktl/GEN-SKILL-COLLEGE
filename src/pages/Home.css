@@ -77,7 +77,19 @@
   gap: 3.5rem;
   flex-wrap: wrap;
 }
-
+#hero-img-primary {
+  max-width: 75%; /* Adjust this number until it looks just right */
+  height: auto;   /* Keeps the aspect ratio intact */
+}
+.home-hero__ugc-overlay {
+  position: absolute;
+  top: -40px; /* move up/down */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* adjust size */
+  z-index: 10;
+  pointer-events: none;
+}
 /* ==========================================================================
     Hero Left Copy Section & New Asset Positioning (Slide 5)
    ========================================================================== */

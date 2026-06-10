@@ -8,12 +8,13 @@ import PartnersSection from "../components/PartnersSection";
 import VideoSection from "../components/VideoSection";
 
 // Image Imports
-import heroImage1 from "../assets/AI Filmmaking-image.webp";
-import heroImage2 from "../assets/Wealth Management.webp";
-import heroImage3 from "../assets/Business Automation.webp";
-import heroImage4 from "../assets/Remedial-Teaching.webp";
+import heroImage1 from "../assets/hero-banner-title-images.webp";
+import heroImage2 from "../assets/AI Filmmaking-image.webp";
+import heroImage3 from "../assets/Wealth Management.webp";
+import heroImage4 from "../assets/Business Automation.webp";
+import heroImage5 from "../assets/Remedial-Teaching.webp";
 // Make sure this file exists in src/assets/
-import heroImage5 from "../assets/hero-banner-title-images.webp"; 
+ 
 
 // Lottie and Bootstrap imports
 import { useLottie } from "lottie-react";
@@ -124,15 +125,16 @@ export function Home() {
             <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy" data-aos="fade-right">
-                  <ManagedLottieText animationData={aiTextAnim} lottieRef={aiRef} />
-                  <div className="home-hero__actions">
-                    <Link className="home-hero__btn" to="/contact/our-office">Join the Class</Link>
-                    <Link className="home-hero__btn" to="/programmes/bvoc">Learn more</Link>
-                  </div>
+                  <ManagedLottieText animationData={brandTitleHB} lottieRef={aiRef} />
                 </div>
                 <div className="home-hero__visual" data-aos="fade-left">
                   <div className="home-hero__frame">
-                    <img src={heroImage1} alt="Filmmaking" className="home-hero__img-animated" />
+                    <img 
+                        id="hero-img-primary"
+                        src={heroImage1} 
+                        alt="Filmmaking" 
+                        className="home-hero__img-animated" 
+                    />
                   </div>
                 </div>
               </div>
@@ -144,9 +146,10 @@ export function Home() {
             <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
-                  <ManagedLottieText animationData={wealthTextAnim} lottieRef={wealthRef} />
+                  <ManagedLottieText animationData={aiTextAnim} lottieRef={wealthRef} />
                   <div className="home-hero__actions">
-                    <Link className="home-hero__btn" to="/programmes">Explore All</Link>
+                    <Link className="home-hero__btn" to="/contact/our-office">Join the Class</Link>
+                    <Link className="home-hero__btn" to="/programmes/bvoc">Learn more</Link>
                   </div>
                 </div>
                 <div className="home-hero__visual">
@@ -163,7 +166,7 @@ export function Home() {
             <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
-                  <ManagedLottieText animationData={businessTextAnim} lottieRef={businessRef} />
+                  <ManagedLottieText animationData={wealthTextAnim} lottieRef={businessRef} />
                   <div className="home-hero__actions">
                     <Link className="home-hero__btn" to="/programmes">Explore All</Link>
                   </div>
@@ -182,7 +185,7 @@ export function Home() {
             <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
-                  <ManagedLottieText animationData={remedialTextAnim} lottieRef={remedialRef} />
+                  <ManagedLottieText animationData={businessTextAnim} lottieRef={remedialRef} />
                   <div className="home-hero__actions">
                     <Link className="home-hero__btn" to="/programmes">Explore All</Link>
                   </div>
@@ -201,7 +204,10 @@ export function Home() {
             <section className="home-hero">
               <div className="home-hero__inner">
                 <div className="home-hero__copy">
-                  <ManagedLottieText animationData={brandTitleHB} lottieRef={brandRef} className="home-hero__text-animated--small" />
+                  <ManagedLottieText animationData={remedialTextAnim} lottieRef={brandRef} className="home-hero__text-animated--small" />
+                  <div className="home-hero__actions">
+                    <Link className="home-hero__btn" to="/programmes">Explore All</Link>
+                  </div>
                 </div>
                 <div className="home-hero__visual">
                   <div className="home-hero__frame">

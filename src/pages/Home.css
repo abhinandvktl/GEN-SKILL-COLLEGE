@@ -78,17 +78,24 @@
   flex-wrap: wrap;
 }
 #hero-img-primary {
+  padding-top: 50px;
   max-width: 75%; /* Adjust this number until it looks just right */
   height: auto;   /* Keeps the aspect ratio intact */
 }
 .home-hero__ugc-overlay {
   position: absolute;
-  top: -40px; /* move up/down */
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px; /* adjust size */
+  width: 500px;
   z-index: 10;
   pointer-events: none;
+}
+
+.home-hero__ugc-overlay svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 /* ==========================================================================
     Hero Left Copy Section & New Asset Positioning (Slide 5)
@@ -196,6 +203,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 /* ==========================================================================
@@ -366,6 +374,7 @@
 
 @media (max-width: 900px) {
   .home-hero__inner {
+
     flex-direction: column-reverse;
     align-items: stretch;
   }
@@ -382,6 +391,11 @@
 
   .home-hero__visual {
     justify-content: stretch;
+  }
+
+  .home-hero__ugc-overlay {
+    width: min(65vw, 220px);
+    top: 0;
   }
 
   .home-hero__frame {
@@ -401,5 +415,25 @@
 @media (max-width: 480px) {
   .home-hero {
     padding: 2rem 5% 3.5rem; /* Secures structural spacing and safety buffers from indicators layout */
+  }
+  .btn-left{
+    display: none;
+  }
+  .btn-right{
+    display: none;
+  }
+  .carousel-indicators{
+    display: none;
+  }
+
+  .home-hero__ugc-overlay {
+    width: min(75vw, 180px);
+    top: 0;
+  }
+  .home-hero__inner{
+    gap:3px;
+  }
+  .carousel-indicators{
+    display: none;
   }
 }

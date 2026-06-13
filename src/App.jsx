@@ -53,6 +53,9 @@ export default function App() {
           <Route path="legal/refund" element={<ContentPage pageKey="legal/refund" />} />
           <Route path="legal/terms" element={<ContentPage pageKey="legal/terms" />} />
 
+          <Route path="pay-now" element={<ContentPage pageKey="contact" />} />
+
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

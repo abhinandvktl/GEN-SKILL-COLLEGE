@@ -25,6 +25,7 @@ import wealthTextAnim from "../assets/Wealth Management Text.json";
 import businessTextAnim from "../assets/Business Automation Text.json";
 import remedialTextAnim  from "../assets/Remedial Teaching Text.json";
 import brandTitleHB from "../assets/brand-title-hb.json";
+import ugcLogoHB from "../assets/ugc-logo-hb.json";
 
 // Controlled Lottie Wrapper Component
 const ManagedLottieText = ({ animationData, lottieRef, className }) => {
@@ -33,13 +34,13 @@ const ManagedLottieText = ({ animationData, lottieRef, className }) => {
     loop: true,
     autoplay: false,
   };
-  const { View, play, stop } = useLottie(options);
+  const { View, play, stop, goToAndPlay } = useLottie(options);
 
   useEffect(() => {
     if (lottieRef) {
-      lottieRef.current = { play, stop };
+      lottieRef.current = { play, stop, goToAndPlay };
     }
-  }, [play, stop, lottieRef]);
+  }, [play, stop, goToAndPlay, lottieRef]);
 
   return <div className={`home-hero__text-animated ${className || ""}`}>{View}</div>;
 };
@@ -65,22 +66,35 @@ export function Home() {
         pause: false
       });
 
-      // Added brandRef and ugcRef to the stop list
       const slideRefs = [aiRef, wealthRef, businessRef, remedialRef, brandRef, ugcRef];
+
       const stopAllSlides = () => {
         slideRefs.forEach((ref) => ref.current?.stop());
+      };
+
+      const playFromStart = (ref) => {
+        if (!ref.current) return;
+        ref.current.goToAndPlay?.(0, true) || ref.current.play();
+      };
+
+      const playSyncedPair = (firstRef, secondRef) => {
+        requestAnimationFrame(() => {
+          playFromStart(firstRef);
+          playFromStart(secondRef);
+        });
       };
 
       const handleSlid = (event) => {
         stopAllSlides();
         setTimeout(() => {
-          if (event.to === 0) aiRef.current?.play();
+          if (event.to === 0) {
+            playSyncedPair(aiRef, ugcRef);
+          }
           if (event.to === 1) wealthRef.current?.play();
           if (event.to === 2) businessRef.current?.play();
           if (event.to === 3) remedialRef.current?.play();
           if (event.to === 4) {
-            brandRef.current?.play();
-            ugcRef.current?.play();
+            playSyncedPair(brandRef, ugcRef);
           }
         }, 50);
       };
@@ -96,7 +110,7 @@ export function Home() {
 
       if (aiRef.current) {
         stopAllSlides();
-        aiRef.current.play();
+        playSyncedPair(aiRef, ugcRef);
       }
 
       return () => {
@@ -135,7 +149,9 @@ export function Home() {
                         alt="Filmmaking" 
                         className="home-hero__img-animated" 
                     />
+                    
                   </div>
+                  <ManagedLottieText animationData={ugcLogoHB} lottieRef={ugcRef} className="home-hero__ugc-overlay" />
                 </div>
               </div>
             </section>
